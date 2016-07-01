@@ -1,0 +1,22 @@
+[Unit]
+Description=Celery Service
+After=network.target
+
+[Service]
+Type=forking
+User=celery
+Group=celery
+EnvironmentFile=-/etc/conf.d/celery
+Environment="ESPUSH_CELERY_CONFIG=/etc/donthackme_elasticsearch/config.yml"
+WorkingDirectory=/opt/donthackme_elasticsearch/
+ExecStart=/opt/donthackme_elasticsearch/venv/bin/celery multi start $CELERYD_NODES -A \
+	$CELERY_APP --logfile=${CELERYD_LOG_FILE} \
+	--pidfile=${CELERYD_PID_FILE} $CELERYD_OPTS
+ExecStop=/opt/donthackme_elasticsearch/venv/bin/celery multi stopwait $CELERYD_NODES \
+	--pidfile=${CELERYD_PID_FILE}
+ExecReload=/opt/donthackme_elasticsearch/venv/bin/celery multi restart $CELERYD_NODES -A \
+	$CELERY_APP --pidfile=${CELERYD_PID_FILE} --logfile=${CELERYD_LOG_FILE} \
+	--loglevel="${CELERYD_LOG_LEVEL}" $CELERYD_OPTS
+
+[Install]
+WantedBy=multi-user.target

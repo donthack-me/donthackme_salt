@@ -1,0 +1,14 @@
+[Unit]
+Description=uWSGI instance to serve donthackme_api
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/donthackme_api
+Environment="PATH=opt/donthackme_api/venv/bin"
+Environment="DONTHACKME_API_SETTINGS=/etc/donthackme_api/config.py"
+ExecStart=/opt/donthackme_api/venv/bin/uwsgi --ini uwsgi.ini
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,4 @@
+mongo_creds.sls
+elasticsearch_creds.sls
+openstack.sls
+letsencrypt/config.sls

@@ -1,0 +1,16 @@
+[Unit]
+Description=Monogo => Elasticsearch Push
+After=syslog.target
+
+[Service]
+Type=simple
+User=celery
+Group=celery
+Environment="ESPUSH_CELERY_CONFIG=/etc/donthackme_elasticsearch/config.yml"
+WorkingDirectory=/opt/donthackme_elasticsearch
+ExecStart=/opt/donthackme_elasticsearch/venv/bin/python /opt/donthackme_elasticsearch/app.py
+StandardOutput=syslog
+StandardError=syslog
+
+[Install]
+WantedBy=multi-user.target

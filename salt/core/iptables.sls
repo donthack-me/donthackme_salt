@@ -71,6 +71,7 @@ salt_http_iptables_rule:
     - jump: ACCEPT
     - dport: 80
     - proto: tcp
+    - in-interface: eth1
     - save: True
     - require_in:
       - iptables: INPUT - TCP Reject
@@ -83,6 +84,7 @@ salt_https_iptables_rule:
     - chain: TCP
     - jump: ACCEPT
     - dport: 443
+    - in-interface: eth1
     - proto: tcp
     - save: True
     - require_in:
@@ -98,6 +100,7 @@ salt_pub_iptables_rule:
     - chain: TCP 
     - jump: ACCEPT
     - dport: 4505
+    - in-interface: eth2
     - proto: tcp
     - save: True
     - require_in:
@@ -111,6 +114,7 @@ salt_sub_iptables_rule:
      - chain: TCP
      - jump: ACCEPT
      - dport: 4506
+     - in-interface: eth2
      - proto: tcp
      - save: True
      - require_in:
@@ -124,6 +128,7 @@ salt_nfs_iptables_rule_1:
      - chain: TCP
      - jump: ACCEPT
      - dport: 111
+     - in-interface: eth2
      - proto: tcp
      - save: True
      - require_in:
@@ -137,6 +142,7 @@ salt_nfs_iptables_rule_2:
      - chain: TCP
      - jump: ACCEPT
      - dport: 2049
+     - in-interface: eth2
      - proto: tcp
      - save: True
      - require_in:
@@ -150,6 +156,7 @@ salt_nfs_iptables_rule_3:
      - chain: UDP
      - jump: ACCEPT
      - dport: 111
+     - in-interface: eth2
      - proto: udp
      - save: True
      - require_in:
@@ -163,6 +170,7 @@ salt_nfs_iptables_rule_4:
      - chain: UDP
      - jump: ACCEPT
      - dport: 2049
+     - in-interface: eth2
      - proto: udp
      - save: True
      - require_in:
@@ -209,7 +217,7 @@ INPUT - UDP Reject:
     - table: filter
     - chain: INPUT
     - jump: REJECT
-    - proto: tcp
+    - proto: udp
     - reject-with: icmp-port-unreachable
     - save: True
     - require:
@@ -224,3 +232,4 @@ INPUT - Reject All:
     - save: True
     - require:
       - iptables: INPUT - TCP Reject
+

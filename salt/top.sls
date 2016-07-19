@@ -3,6 +3,7 @@ base:
     - core.packages
     - core.ssh
     - core.iptables
+    - core.ip6tables
     - core.xenstore_grains
     - users
   'roles:webhead':
@@ -21,8 +22,10 @@ base:
   'roles:celerymaster':
     - match: grain
     - espush.celery.master
-  'salt.*':
-    - vault.docker
-    - vault.containers
+  'roles:saltmaster':
+    - match: grain
     - letsencrypt.directory
     - nfs.server
+  'roles:cowrie':
+    - match: grain
+    - cowrie

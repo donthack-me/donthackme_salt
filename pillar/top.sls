@@ -23,4 +23,7 @@ base:
   "roles:webhead":
     - match: grain
     - letsencrypt.nfs-client
-    - mongo
+    - mongo_creds
+  'roles:cowrie':
+    - match: grain
+    - cowrie

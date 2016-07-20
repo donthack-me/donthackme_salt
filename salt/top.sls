@@ -9,7 +9,7 @@ base:
   'roles:webhead':
     - match: grain
     - web.uwsgi
-    - web.nginx
+    - web.bootstrap_nginx
     - nfs.client
     - nfs.mount
     - web.complete_event

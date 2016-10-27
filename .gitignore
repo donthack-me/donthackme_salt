@@ -3,3 +3,4 @@ elasticsearch_creds.sls
 openstack.sls
 letsencrypt/config.sls
 celery.sls
+cloudflare.sls

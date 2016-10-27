@@ -6,7 +6,7 @@ base:
     - match: grain
     - letsencrypt.nfs-server
     - letsencrypt.config
-    - openstack
+#    - openstack
   "roles:redis":
     - match: grain
     - redis.config
